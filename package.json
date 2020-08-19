@@ -1,9 +1,8 @@
 {
   "name": "zlgis",
-  "version": "0.1",
+  "version": "0.1.2",
   "author": "ZongAn",
-  "git": "",
-  "private": true,
+  "git": "https://github.com/anZong/zlgis.git",
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build"
@@ -11,9 +10,7 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "esri-loader": "^2.15.0",
-    "vue": "^2.6.11",
-    "vue-router": "^3.2.0",
-    "vuex": "^3.4.0"
+    "vue": "^2.6.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",

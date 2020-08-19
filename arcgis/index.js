@@ -58,8 +58,9 @@ class ArcGis {
    * @param options
    * @returns {Promise<any>}
    */
-  genMap(sel, options = defaultMapOptions) {
+  genMap(sel, options = {}) {
     options = JSON.parse(JSON.stringify(options))
+    options = Object.assign(defaultMapOptions, options)
     const config = this.appConfig
     let layers = this.initLayers(options.layers)
 

@@ -10,10 +10,10 @@
 </template>
 
 <script>
-import ArcGis from "@/arcgis/index";
-import BaseMapToggle from '@/arcgis/widgets/BasemapToggle';
-import CommonTools from '@/arcgis/widgets/CommonTools';
-import LatLon from '@/arcgis/widgets/LatLon';
+import ArcGis from "../../arcgis/index";
+import BaseMapToggle from '../../arcgis/widgets/BasemapToggle';
+import CommonTools from '../../arcgis/widgets/CommonTools';
+import LatLon from '../../arcgis/widgets/LatLon';
 
 import Vue from 'vue';
 

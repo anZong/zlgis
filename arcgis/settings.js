@@ -6,6 +6,8 @@
 
 export const defaultOptions = {
   version: '4.15',
+  url: 'https://js.arcgis.com/4.15/',
+  css: 'https://js.arcgis.com/4.15/esri/themes/light/main.css'
 }
 
 export const defaultModules = [
@@ -26,7 +28,6 @@ export const defaultModules = [
   'esri/Color',
   'esri/layers/BaseTileLayer',
   'esri/layers/MapImageLayer',
-  'esri/geometry/Point',
   'esri/widgets/Compass',
   'esri/widgets/DistanceMeasurement2D',
   'esri/widgets/AreaMeasurement2D',
@@ -35,17 +36,26 @@ export const defaultModules = [
   'esri/symbols/TextSymbol',
   'esri/geometry/support/webMercatorUtils',
   'esri/views/draw/Draw',
-  "esri/geometry/geometryEngine"
+  "esri/geometry/geometryEngine",
+  'esri/geometry/Point',
+  "esri/geometry/Polyline",
+  "esri/geometry/Polygon",
+  "esri/widgets/Fullscreen",
+  "esri/widgets/Search",
+  "esri/widgets/Sketch",
+  "esri/widgets/Sketch/SketchViewModel",
+  "esri/widgets/Zoom",
+  "esri/widgets/Measurement"
 ]
 
 export const defaultMapOptions = {
   mapOptions: {},
   mapViewOptions: {
-    zoom: 8,
-    center: [102, 25],
+    zoom: 12,
+    center: [102, 25]
   },
   layers: [{
-    urlTemplate: "http://mt1.google.cn/maps/vt/lyrs=y@189&hl=zh-CN&x={x}&y={y}&z={z}&s=Galil",
+    urlTemplate: "http://mt1.google.cn/maps/vt/lyrs=s@189&hl=zh-CN&x={x}&y={y}&z={z}&s=Galil",
     title: "GoogleImage",
     id: "GoogleImage",
     visible: true

@@ -55,7 +55,7 @@ class ArcGisDraw {
   }
 
   // 画点
-  drawPoint(coordinates) {
+  drawPoint(coordinates, styleObj=null) {
     const point = {
       type: "point", // autocasts as /Point
       x: coordinates[0],
@@ -64,58 +64,37 @@ class ArcGisDraw {
     };
     const pointGraphic = new this.arcgis.esri.Graphic({
       geometry: point,
-      symbol: this.styleObj
+      symbol: styleObj || this.styleObj
     });
     this.view.graphics.add(pointGraphic);
-    // return pointGraphic;
   }
 
   // 画线
-  drawLine(vertices) {
+  drawLine(vertices, styleObj=null) {
     var polyline = {
       type: 'polyline',
       paths: vertices,
       spatialReference: this.view.spatialReference
     };
-    /*var fillSymbol =
-    {
-      type: "simple-fill", // autocasts as new SimpleFillSymbol()
-      color: [227, 0, 0, 0.8],
-      outline: {
-        // autocasts as new SimpleLineSymbol()
-        color: [255, 255, 255],
-        width: 1
-      }
-    };*/
     var polygonGraphic = new this.arcgis.esri.Graphic({
       geometry: polyline,
-      symbol: this.styleObj
+      symbol: styleObj || this.styleObj
     });
     this.view.graphics.add(polygonGraphic);
-    // return polygonGraphic;
   }
 
   // 画多边形
-  drawPolygon(vertices) {
+  drawPolygon(vertices, styleObj=null) {
     var polygon = {
       type: 'polygon',
       rings: vertices,
       spatialReference: this.view.spatialReference
     }
-    // var fillSymbol = {
-    //   type: "simple-fill", // autocasts as new SimpleFillSymbol()
-    //   color: [255, 255, 0, 0.2],
-    //   outline: {
-    //     color: [255, 255, 0],
-    //     width: 1
-    //   }
-    // }
     var polygonGraphic = new this.esri.Graphic({
       geometry: polygon,
-      symbol: this.styleObj
+      symbol: styleObj || this.styleObj
     })
     this.view.graphics.add(polygonGraphic);
-    // return polygonGraphic;
   }
 }
 

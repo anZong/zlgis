@@ -14,14 +14,18 @@ export default {
   },
   methods: {},
   mounted(){
-    this.$EventBus.$on('mapLoaded', ()=>{
+    this.$EventBus.$on(['mapLoaded', 'mapChanged'], ()=>{
       this.$arcgis.view.on('pointer-move', (event) => {
         const point = { x: event.x, y: event.y }
         const latlon = this.$arcgis.view.toMap(point)
+        if(!latlon) return;
         this.lat = latlon.latitude.toFixed(6)
         this.lon = latlon.longitude.toFixed(6)
       })
     })
+  },
+  destroyed(){
+    this.$EventBus.$off(['mapLoaded', 'mapChanged'])
   }
 }
 </script>
@@ -29,11 +33,10 @@ export default {
 <style scoped>
 .latlon{
     position: absolute;
-    bottom: 10px;
-    left: 10px;
+    bottom: 5px;
+    left: 5px;
     color: white;
     font-size: 14px;
-    font-family: "Microsoft YaHei UI";
     font-weight: 700;
 }
 </style>

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import zlmap from '../views/map'
+import zlmap from '../../arcgis/examples/map'
 
 Vue.use(VueRouter)
 

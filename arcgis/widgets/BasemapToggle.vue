@@ -24,9 +24,22 @@
 <script>
 export default {
   name: "BasemapToggle",
+  props:{
+    show3D:{
+      type: Boolean,
+      default: true
+    }
+  },
   data() {
     return {
-      basemaps: [
+      curBaseMap: "GoogleImage",
+      position: "bottom-right",
+      fold: true // 展开还是折叠
+    };
+  },
+  computed:{
+    basemaps(){
+      let arr = [
         {
           name: "GoogleImage",
           label: "卫星地图",
@@ -38,29 +51,24 @@ export default {
           label: "街道地图",
           image: require("../static/images/streetMap.png"),
           type: "2d"
-        },
-        {
+        }
+      ]
+      if(this.show3D){
+        arr.push({
           name: "GoogleImage3D",
           label: "3D地图",
           image: require("../static/images/3DMap.png"),
           type: "3d"
-        }
-      ],
-      curBaseMap: "GoogleImage",
-      position: "bottom-right",
-      fold: true // 展开还是折叠
-    };
+        })
+      }
+      return arr
+    }
   },
   methods: {
     changeBaseMap(basemap) {
       // 切换底图
       const arcgis = this.$arcgis;
       const basemapname = basemap.name;
-      const activeLayers = arcgis.map.allLayers.filter(v=>{
-        return v.id !== "worldElevation"
-      });
-      // 切换2d/3d
-      arcgis.switchView(basemap.type, activeLayers);
       this.curBaseMap = basemapname;
       this.type = basemap.type;
       const flayer = arcgis.getLayer("GoogleImage");
@@ -73,12 +81,20 @@ export default {
           flayer.visible = false;
           slayer.visible = true;
         }
+      }else{
+        // 切换2d/3d
+        flayer.visible = true;
+        slayer.visible = false;
       }
+      const activeLayers = arcgis.map.allLayers.items.filter(v=>{
+        return v.id !== "worldElevation"
+      });
+      arcgis.switchView(basemap.type, activeLayers);
+      // 折叠起来的时候，点击切换顺序
       if (this.fold) {
-        // 折叠起来的时候，点击切换顺序
         this.changeOrder();
       }
-      this.$EventBus.$emit('mapLoaded');
+      this.$EventBus.$emit('mapChanged');
     },
     changeOrder() {
       const index = this.basemaps.findIndex(v => {
@@ -101,21 +117,21 @@ export default {
   display: flex;
   justify-content: flex-end;
   &.bottom-right {
-    right: 20px;
-    bottom: 20px;
+    right: 10px;
+    bottom: 10px;
   }
   &.top-right {
-    right: 20px;
+    right: 10px;
     top: 100px;
   }
   &.bottom-left {
-    left: 20px;
-    bottom: 20px;
+    left: 10px;
+    bottom: 10px;
   }
   .images {
     height: 90px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     &.unfold {
       .item {
         display: flex;

@@ -33,7 +33,7 @@ src/views下新建map.vue
 ```
 创建ArcGis实例，并初始化需要用到的esri模块
 ```vue
-import ArcGis from "arcgis/index";
+import {ArcGis} from "zlgis";
 import Vue from 'vue';      
     
 export default {
